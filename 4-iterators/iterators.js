@@ -1,32 +1,20 @@
-function createNewFunction() {
-    function add2 (num) {
-        return num + 2;
-    }
-    return add2
-}
-
-const newFunction = createNewFunction();
-
-const result = newFunction(3);
-
-// -----------------------
-// COVE or Closure
-
-function createFunction(array) {
+function createFlow(array) {
     let i = 0;
-    function inner() {
-        const element = array[i];
-        i++;
-        return element;
+    const inner = {
+        next: function () {
+            const element = array[i];
+            i++;
+            return element;
+        }
     }
     return inner;
 }
 
-const returnNextElement = createFunction([4, 5, 6]);
+const returnNextElement = createFlow([4, 5, 6]);
 
-const element1 = returnNextElement();
-const element2 = returnNextElement();
-const element3 = returnNextElement();
+const element1 = returnNextElement.next();
+const element2 = returnNextElement.next();
+const element3 = returnNextElement.next();
 
 console.log(element1);
 console.log(element2);
